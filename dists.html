@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Distributions &#8212; Nengo extras 0.1.0 docs</title>
+    <title>Distributions &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +35,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Learning rules" href="learning_rules.html" />
-    <link rel="prev" title="Deep learning examples" href="deeplearning-examples.html" />
+    <link rel="prev" title="ImageNet ILSVRC-2012 classifier with a spiking CNN" href="examples/cuda_convnet/imagenet_spiking_cnn.html" />
 <link rel="stylesheet" type="text/css" href="_static/custom.css">
 
 
@@ -54,9 +54,9 @@
           <a href="learning_rules.html" title="Learning rules"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="deeplearning-examples.html" title="Deep learning examples"
+          <a href="examples/cuda_convnet/imagenet_spiking_cnn.html" title="ImageNet ILSVRC-2012 classifier with a spiking CNN"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -67,7 +67,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    index.html" class="text-logo">Nengo extras 0.1</a>
+    index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -77,16 +77,12 @@
     
       <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -146,6 +142,15 @@ can be used.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#nengo_extras.dists.Tile" title="nengo_extras.dists.Tile"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.dists.Tile</span></code></a>(values)</td>
 <td>Choose values in order from an array</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="#nengo_extras.dists.gaussian_icdf" title="nengo_extras.dists.gaussian_icdf"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.dists.gaussian_icdf</span></code></a>(mean,&nbsp;std)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nengo_extras.dists.loggaussian_icdf" title="nengo_extras.dists.loggaussian_icdf"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.dists.loggaussian_icdf</span></code></a>(…[,&nbsp;base])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nengo_extras.dists.uniform_icdf" title="nengo_extras.dists.uniform_icdf"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.dists.uniform_icdf</span></code></a>(low,&nbsp;high)</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <dl class="class">
@@ -180,14 +185,14 @@ the identity matrix (independent parameters).</p>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">gaussian_icdf</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">loggaussian_icdf</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">uniform_icdf</span></code></p>
+<p class="last"><a class="reference internal" href="#nengo_extras.dists.gaussian_icdf" title="nengo_extras.dists.gaussian_icdf"><code class="xref py py-obj docutils literal"><span class="pre">gaussian_icdf</span></code></a>, <a class="reference internal" href="#nengo_extras.dists.loggaussian_icdf" title="nengo_extras.dists.loggaussian_icdf"><code class="xref py py-obj docutils literal"><span class="pre">loggaussian_icdf</span></code></a>, <a class="reference internal" href="#nengo_extras.dists.uniform_icdf" title="nengo_extras.dists.uniform_icdf"><code class="xref py py-obj docutils literal"><span class="pre">uniform_icdf</span></code></a></p>
 </div>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="r1111" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[R1111]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id3">3</a>)</em> Copula (probability theory). Wikipedia.
-<a class="reference external" href="https://en.wikipedia.org/wiki/Copula_(probability_theory">https://en.wikipedia.org/wiki/Copula_(probability_theory</a>)</td></tr>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Copula_(probability_theory%29">https://en.wikipedia.org/wiki/Copula_(probability_theory%29</a></td></tr>
 </tbody>
 </table>
 </dd></dl>
@@ -223,6 +228,21 @@ for a neuron parameter, but are not sure how many neurons there will be.</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="nengo_extras.dists.gaussian_icdf">
+<code class="descclassname">nengo_extras.dists.</code><code class="descname">gaussian_icdf</code><span class="sig-paren">(</span><em>mean</em>, <em>std</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/dists.html#gaussian_icdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.dists.gaussian_icdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="nengo_extras.dists.loggaussian_icdf">
+<code class="descclassname">nengo_extras.dists.</code><code class="descname">loggaussian_icdf</code><span class="sig-paren">(</span><em>log_mean</em>, <em>log_std</em>, <em>base=2.718281828459045</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/dists.html#loggaussian_icdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.dists.loggaussian_icdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="nengo_extras.dists.uniform_icdf">
+<code class="descclassname">nengo_extras.dists.</code><code class="descname">uniform_icdf</code><span class="sig-paren">(</span><em>low</em>, <em>high</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/dists.html#uniform_icdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.dists.uniform_icdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -231,7 +251,7 @@ for a neuron parameter, but are not sure how many neurons there will be.</p>
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="deeplearning-examples.html" title="previous chapter (use the left arrow)">Deep learning examples</a>
+        <a class="btn btn-default" href="examples/cuda_convnet/imagenet_spiking_cnn.html" title="previous chapter (use the left arrow)">ImageNet ILSVRC-2012 classifier with a spiking CNN</a>
       </div>
     
       <div class="pull-right">
@@ -253,9 +273,9 @@ for a neuron parameter, but are not sure how many neurons there will be.</p>
           <a href="learning_rules.html" title="Learning rules"
              >next</a> |</li>
         <li class="right" >
-          <a href="deeplearning-examples.html" title="Deep learning examples"
+          <a href="examples/cuda_convnet/imagenet_spiking_cnn.html" title="ImageNet ILSVRC-2012 classifier with a spiking CNN"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">

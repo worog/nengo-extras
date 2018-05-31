@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.dists &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.dists &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -124,16 +120,16 @@
 <span class="kn">from</span> <span class="nn">nengo.params</span> <span class="k">import</span> <span class="n">NdarrayParam</span><span class="p">,</span> <span class="n">NumberParam</span><span class="p">,</span> <span class="n">TupleParam</span>
 
 
-<span class="k">def</span> <span class="nf">gaussian_icdf</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
+<div class="viewcode-block" id="gaussian_icdf"><a class="viewcode-back" href="../../dists.html#nengo_extras.dists.gaussian_icdf">[docs]</a><span class="k">def</span> <span class="nf">gaussian_icdf</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">sps</span>
 
     <span class="k">def</span> <span class="nf">icdf</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sps</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">icdf</span>
+    <span class="k">return</span> <span class="n">icdf</span></div>
 
 
-<span class="k">def</span> <span class="nf">loggaussian_icdf</span><span class="p">(</span><span class="n">log_mean</span><span class="p">,</span> <span class="n">log_std</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">):</span>
+<div class="viewcode-block" id="loggaussian_icdf"><a class="viewcode-back" href="../../dists.html#nengo_extras.dists.loggaussian_icdf">[docs]</a><span class="k">def</span> <span class="nf">loggaussian_icdf</span><span class="p">(</span><span class="n">log_mean</span><span class="p">,</span> <span class="n">log_std</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">sps</span>
 
     <span class="n">mean</span> <span class="o">=</span> <span class="n">base</span><span class="o">**</span><span class="n">log_mean</span>
@@ -142,14 +138,14 @@
     <span class="k">def</span> <span class="nf">icdf</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sps</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">log_std2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">mean</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">icdf</span>
+    <span class="k">return</span> <span class="n">icdf</span></div>
 
 
-<span class="k">def</span> <span class="nf">uniform_icdf</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+<div class="viewcode-block" id="uniform_icdf"><a class="viewcode-back" href="../../dists.html#nengo_extras.dists.uniform_icdf">[docs]</a><span class="k">def</span> <span class="nf">uniform_icdf</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">icdf</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">+</span> <span class="n">low</span>
 
-    <span class="k">return</span> <span class="n">icdf</span>
+    <span class="k">return</span> <span class="n">icdf</span></div>
 
 
 <div class="viewcode-block" id="Concatenate"><a class="viewcode-back" href="../../dists.html#nengo_extras.dists.Concatenate">[docs]</a><span class="k">class</span> <span class="nc">Concatenate</span><span class="p">(</span><span class="n">Distribution</span><span class="p">):</span>
@@ -195,7 +191,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [1] Copula (probability theory). Wikipedia.</span>
-<span class="sd">       https://en.wikipedia.org/wiki/Copula_(probability_theory)</span>
+<span class="sd">       https://en.wikipedia.org/wiki/Copula_(probability_theory%29</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">marginal_icdfs</span> <span class="o">=</span> <span class="n">TupleParam</span><span class="p">(</span><span class="s1">&#39;marginal_icdfs&#39;</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -284,10 +280,10 @@
         <span class="n">dd</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">d</span>
         <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">dd</span><span class="p">))</span>
 
-        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span>
-             <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">nd</span><span class="p">)</span>
+        <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">ndims</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span>
+             <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">ndims</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">ndims</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="n">samples</span><span class="p">[</span><span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">d</span><span class="o">=</span><span class="n">dd</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
@@ -345,7 +341,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

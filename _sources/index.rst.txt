@@ -23,22 +23,18 @@ To install Nengo extras, we recommend using ``pip``.
 
 .. code:: bash
 
-   pip install nengo_extras
+   pip install nengo-extras
 
 .. toctree::
    :maxdepth: 2
 
    deeplearning
-   deeplearning-examples
    dists
    learning_rules
    networks
    neurons
-   processes
    vision
-   vision-examples
    visualization
-   visualization-examples
 
 * :ref:`genindex`
 

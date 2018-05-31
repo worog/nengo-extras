@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.keras &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.keras &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -128,19 +124,64 @@
 
 <div class="viewcode-block" id="SoftLIF"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.keras.SoftLIF">[docs]</a><span class="k">class</span> <span class="nc">SoftLIF</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">tau_rc</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">tau_ref</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span>
-                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">noise_model</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">tau_s</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">supports_masking</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">=</span> <span class="n">amplitude</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span> <span class="o">=</span> <span class="n">tau_rc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tau_ref</span> <span class="o">=</span> <span class="n">tau_ref</span>
+
+        <span class="k">if</span> <span class="n">noise_model</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;alpharc&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized noise model&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise_model</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span> <span class="o">=</span> <span class="n">tau_s</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tau_rc and tau_s must be different&quot;</span><span class="p">)</span>
+
         <span class="nb">super</span><span class="p">(</span><span class="n">SoftLIF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_ref</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span><span class="o">*</span><span class="n">K</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">j</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">switch</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">backend</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tensorflow&#39;</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+            <span class="n">expm1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expm1</span>
+            <span class="n">log1p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">log1p</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+            <span class="n">expm1</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">expm1</span>
+            <span class="n">log1p</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">log1p</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">switch</span>
+
+        <span class="c1"># compute non-noisy output</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
+        <span class="n">x_valid</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">20</span>
+        <span class="n">xs_safe</span> <span class="o">=</span> <span class="n">where</span><span class="p">(</span><span class="n">x_valid</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">xs_safe</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_ref</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span><span class="o">*</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">x_valid</span><span class="p">,</span> <span class="n">log1p</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">j</span><span class="p">),</span> <span class="o">-</span><span class="n">xs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span><span class="o">/</span><span class="n">p</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_model</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_model</span> <span class="o">==</span> <span class="s1">&#39;alpharc&#39;</span><span class="p">:</span>
+            <span class="c1"># compute noisy output for forward pass</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span>
+            <span class="n">u01</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">random_uniform</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">u01</span> <span class="o">*</span> <span class="n">p</span>
+            <span class="n">q_rc</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span><span class="p">)</span>
+            <span class="n">q_s</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span><span class="p">)</span>
+            <span class="n">r_rc1</span> <span class="o">=</span> <span class="o">-</span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="n">p</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span><span class="p">)</span>  <span class="c1"># 1 - exp(-p/tau_rc)</span>
+            <span class="n">r_s1</span> <span class="o">=</span> <span class="o">-</span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="n">p</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span><span class="p">)</span>  <span class="c1"># 1 - exp(-p/tau_s)</span>
+
+            <span class="n">pt</span> <span class="o">=</span> <span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r_s1</span><span class="p">),</span> <span class="n">K</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+            <span class="n">qt</span> <span class="o">=</span> <span class="n">where</span><span class="p">(</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span><span class="p">,</span> <span class="n">q_s</span><span class="o">*</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">pt</span><span class="p">),</span> <span class="n">K</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+            <span class="n">rt</span> <span class="o">=</span> <span class="n">qt</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_s</span> <span class="o">*</span> <span class="n">d</span> <span class="o">*</span> <span class="n">r_s1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">rn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau_rc</span><span class="o">*</span><span class="p">(</span><span class="n">q_rc</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="o">*</span><span class="n">r_rc1</span><span class="p">)</span> <span class="o">-</span> <span class="n">q_s</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="o">*</span><span class="n">r_s1</span><span class="p">))</span> <span class="o">-</span> <span class="n">rt</span>
+
+            <span class="c1"># r + stop_gradient(rn - r) = rn on forward pass, r on backwards</span>
+            <span class="k">return</span> <span class="n">r</span> <span class="o">+</span> <span class="n">K</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span><span class="o">*</span><span class="n">rn</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span><span class="p">,</span>
@@ -186,6 +227,17 @@
     <span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">h5_path</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span></div>
 
 
+<span class="k">def</span> <span class="nf">kmodel_compute_shapes</span><span class="p">(</span><span class="n">kmodel</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kmodel</span><span class="p">,</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">)</span>
+
+    <span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_shape</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">kmodel</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">compute_output_shape</span><span class="p">(</span><span class="n">shapes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">shapes</span>
+
+
 <div class="viewcode-block" id="SequentialNetwork"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.keras.SequentialNetwork">[docs]</a><span class="k">class</span> <span class="nc">SequentialNetwork</span><span class="p">(</span><span class="n">nengo_extras</span><span class="o">.</span><span class="n">deepnetworks</span><span class="o">.</span><span class="n">SequentialNetwork</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">synapse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lif_type</span><span class="o">=</span><span class="s1">&#39;lif&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -229,21 +281,33 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_full_layer</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add_conv2d_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
         <span class="n">shape_in</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">filters</span><span class="p">,</span> <span class="n">biases</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
-        <span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># flip</span>
-        <span class="n">strides</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">subsample</span>
+        <span class="n">strides</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">strides</span>
 
-        <span class="n">nf</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">shape</span>
-        <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">border_mode</span> <span class="o">==</span> <span class="s1">&#39;valid&#39;</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">layer</span><span class="o">.</span><span class="n">data_format</span> <span class="o">==</span> <span class="s1">&#39;channels_first&#39;</span>
+        <span class="n">nc</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">shape_in</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">backend</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;theano&#39;</span><span class="p">:</span>
+            <span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># theano has flipped filters</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># to make contiguous</span>
+
+        <span class="n">nf</span><span class="p">,</span> <span class="n">nc2</span><span class="p">,</span> <span class="n">si</span><span class="p">,</span> <span class="n">sj</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">nc</span> <span class="o">==</span> <span class="n">nc2</span><span class="p">,</span> <span class="s2">&quot;Filter channels must match input channels&quot;</span>
+
+        <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">padding</span> <span class="o">==</span> <span class="s1">&#39;valid&#39;</span><span class="p">:</span>
             <span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">layer</span><span class="o">.</span><span class="n">border_mode</span> <span class="o">==</span> <span class="s1">&#39;same&#39;</span><span class="p">:</span>
-            <span class="n">padding</span> <span class="o">=</span> <span class="p">((</span><span class="n">ni</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">nj</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">layer</span><span class="o">.</span><span class="n">padding</span> <span class="o">==</span> <span class="s1">&#39;same&#39;</span><span class="p">:</span>
+            <span class="n">padding</span> <span class="o">=</span> <span class="p">((</span><span class="n">si</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">sj</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized border mode </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">layer</span><span class="o">.</span><span class="n">border_mode</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized padding </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">layer</span><span class="o">.</span><span class="n">padding</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_conv_layer</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="n">strides</span><span class="p">,</span>
-                                   <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_conv_layer</span><span class="p">(</span>
+            <span class="n">shape_in</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="n">strides</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+            <span class="n">border</span><span class="o">=</span><span class="s1">&#39;floor&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">conv</span><span class="o">.</span><span class="n">size_out</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">output_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="n">conv</span>
 
     <span class="k">def</span> <span class="nf">_add_pool2d_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">shape_in</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -383,7 +447,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

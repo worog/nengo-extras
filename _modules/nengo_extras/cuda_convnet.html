@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.cuda_convnet &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.cuda_convnet &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -300,7 +296,7 @@
         <span class="n">biases</span> <span class="o">=</span> <span class="n">layer</span><span class="p">[</span><span class="s1">&#39;biases&#39;</span><span class="p">]</span>
         <span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_conv_layer</span><span class="p">(</span>
             <span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">filters</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="n">st</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+            <span class="n">border</span><span class="o">=</span><span class="s1">&#39;ceil&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
         <span class="k">assert</span> <span class="n">layer</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">shape_out</span> <span class="o">==</span> <span class="p">(</span><span class="n">nf</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">layer</span>
 
@@ -345,7 +341,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

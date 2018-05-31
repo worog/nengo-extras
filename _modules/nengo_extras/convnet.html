@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.convnet &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.convnet &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -129,7 +125,7 @@
     <span class="k">return</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Conv2d"><a class="viewcode-back" href="../../processes.html#nengo_extras.Conv2d">[docs]</a><span class="k">class</span> <span class="nc">Conv2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="Conv2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.Conv2d">[docs]</a><span class="k">class</span> <span class="nc">Conv2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform 2-D (image) convolution on an input.</span>
 
 <span class="sd">    Parameters</span>
@@ -160,9 +156,10 @@
     <span class="n">padding</span> <span class="o">=</span> <span class="n">ShapeParam</span><span class="p">(</span><span class="s1">&#39;padding&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="n">NdarrayParam</span><span class="p">(</span><span class="s1">&#39;filters&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,))</span>
     <span class="n">biases</span> <span class="o">=</span> <span class="n">NdarrayParam</span><span class="p">(</span><span class="s1">&#39;biases&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,),</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">border</span> <span class="o">=</span> <span class="n">EnumParam</span><span class="p">(</span><span class="s1">&#39;border&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;floor&#39;</span><span class="p">,</span> <span class="s1">&#39;ceil&#39;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape_in</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span>
-                 <span class="n">biases</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape_in</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">biases</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">border</span><span class="o">=</span><span class="s1">&#39;ceil&#39;</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span> <span class="o">=</span> <span class="n">shape_in</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
@@ -179,14 +176,16 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">strides</span> <span class="o">=</span> <span class="n">strides</span> <span class="k">if</span> <span class="n">is_iterable</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">strides</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span> <span class="k">if</span> <span class="n">is_iterable</span><span class="p">(</span><span class="n">padding</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">padding</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">border</span> <span class="o">=</span> <span class="n">border</span>
 
         <span class="n">nf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">nxi</span><span class="p">,</span> <span class="n">nxj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">si</span><span class="p">,</span> <span class="n">sj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
         <span class="n">pi</span><span class="p">,</span> <span class="n">pj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span>
         <span class="n">sti</span><span class="p">,</span> <span class="n">stj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strides</span>
-        <span class="n">nyi</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span> <span class="o">+</span> <span class="n">nxi</span> <span class="o">-</span> <span class="n">si</span><span class="p">)</span> <span class="o">/</span> <span class="n">sti</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">nyj</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pj</span> <span class="o">+</span> <span class="n">nxj</span> <span class="o">-</span> <span class="n">sj</span><span class="p">)</span> <span class="o">/</span> <span class="n">stj</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">rounder</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">border</span> <span class="o">==</span> <span class="s1">&#39;ceil&#39;</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span>
+        <span class="n">nyi</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rounder</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span> <span class="o">+</span> <span class="n">nxi</span> <span class="o">-</span> <span class="n">si</span><span class="p">)</span> <span class="o">/</span> <span class="n">sti</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">nyj</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rounder</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pj</span> <span class="o">+</span> <span class="n">nxj</span> <span class="o">-</span> <span class="n">sj</span><span class="p">)</span> <span class="o">/</span> <span class="n">stj</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shape_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">nf</span><span class="p">,</span> <span class="n">nyi</span><span class="p">,</span> <span class="n">nyj</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nyi</span><span class="p">,</span> <span class="n">nyj</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of local filters </span><span class="si">%r</span><span class="s2"> must match out shape &quot;</span>
@@ -253,7 +252,7 @@
         <span class="k">return</span> <span class="n">step_conv2d</span></div>
 
 
-<div class="viewcode-block" id="Pool2d"><a class="viewcode-back" href="../../processes.html#nengo_extras.Pool2d">[docs]</a><span class="k">class</span> <span class="nc">Pool2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="Pool2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.Pool2d">[docs]</a><span class="k">class</span> <span class="nc">Pool2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform 2-D (image) pooling on an input.</span>
 
 <span class="sd">    Parameters</span>
@@ -350,7 +349,7 @@
         <span class="k">return</span> <span class="n">step_pool2d</span></div>
 
 
-<div class="viewcode-block" id="PresentJitteredImages"><a class="viewcode-back" href="../../processes.html#nengo_extras.PresentJitteredImages">[docs]</a><span class="k">class</span> <span class="nc">PresentJitteredImages</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="PresentJitteredImages"><a class="viewcode-back" href="../../vision.html#nengo_extras.PresentJitteredImages">[docs]</a><span class="k">class</span> <span class="nc">PresentJitteredImages</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="n">images</span> <span class="o">=</span> <span class="n">NdarrayParam</span><span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,))</span>
     <span class="n">image_shape</span> <span class="o">=</span> <span class="n">ShapeParam</span><span class="p">(</span><span class="s1">&#39;image_shape&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">output_shape</span> <span class="o">=</span> <span class="n">ShapeParam</span><span class="p">(</span><span class="s1">&#39;output_shape&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -432,7 +431,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Deep learning &#8212; Nengo extras 0.1.0 docs</title>
+    <title>Deep learning &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/config/TeX-AMS-MML_HTMLorMML.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep learning examples" href="deeplearning-examples.html" />
+    <link rel="next" title="MNIST classifier with Keras and Nengo" href="examples/keras/mnist_spiking_cnn.html" />
     <link rel="prev" title="Nengo extras" href="index.html" />
 <link rel="stylesheet" type="text/css" href="_static/custom.css">
 
@@ -51,12 +51,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="deeplearning-examples.html" title="Deep learning examples"
+          <a href="examples/keras/mnist_spiking_cnn.html" title="MNIST classifier with Keras and Nengo"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Nengo extras"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -67,7 +67,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    index.html" class="text-logo">Nengo extras 0.1</a>
+    index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -77,21 +77,21 @@
     
       <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Deep learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/keras/mnist_spiking_cnn.html">MNIST classifier with Keras and Nengo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/cuda_convnet/cifar10_spiking_cnn.html">CIFAR-10 classifier with a spiking CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/cuda_convnet/imagenet_spiking_cnn.html">ImageNet ILSVRC-2012 classifier with a spiking CNN</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#keras">Keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#networks">Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#processes">Processes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -130,12 +130,20 @@
 <p>Classes and utilities for doing deep learning with Nengo.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">These utilities were created before <a class="reference external" href="https://www.nengo.ai/nengo_dl">Nengo DL</a>,
+<p class="last">These utilities were created before <a class="reference external" href="https://www.nengo.ai/nengo-dl">Nengo DL</a>,
 which provides tighter integration between
 Nengo and TensorFlow.
 If you are new to Nengo or new to doing deep learning in Nengo,
-we recommend that you first check out <a class="reference external" href="https://www.nengo.ai/nengo_dl">Nengo DL</a>
+we recommend that you first check out <a class="reference external" href="https://www.nengo.ai/nengo-dl">Nengo DL</a>
 to see if it fits your use case.</p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/keras/mnist_spiking_cnn.html">MNIST classifier with Keras and Nengo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/cuda_convnet/cifar10_spiking_cnn.html">CIFAR-10 classifier with a spiking CNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/cuda_convnet/imagenet_spiking_cnn.html">ImageNet ILSVRC-2012 classifier with a spiking CNN</a></li>
+</ul>
 </div>
 <div class="section" id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
@@ -243,7 +251,7 @@ Configuration settings are listed below.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filepath</strong> : str (optional, Default: None)</p>
 <blockquote>
 <div><p>Path to the previously downloaded ‘cifar-10-python.tar.gz’ file.
-If <code class="xref py py-obj docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
+If <code class="docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
 </div></blockquote>
 <p><strong>n_train</strong> : int (optional, Default: 6)</p>
 <blockquote>
@@ -288,7 +296,7 @@ If <code class="xref py py-obj docutils literal"><span class="pre">None</span></
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filepath</strong> : str (optional, Default: None)</p>
 <blockquote>
 <div><p>Path to the previously downloaded ‘cifar-100-python.tar.gz’ file.
-If <code class="xref py py-obj docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
+If <code class="docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
 </div></blockquote>
 <p><strong>fine_labels</strong> : boolean (optional, Default: True)</p>
 <blockquote>
@@ -332,7 +340,7 @@ the dataset, and can be used to test pretrained classifiers.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filepath</strong> : str (optional, Default: None)</p>
 <blockquote>
 <div><p>Path to the previously downloaded ‘ilsvrc-2012-batches-test3.tar.gz’.
-If <code class="xref py py-obj docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
+If <code class="docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
 </div></blockquote>
 <p><strong>n_files</strong> : int (optional, Default: None)</p>
 <blockquote>
@@ -373,7 +381,7 @@ If <code class="xref py py-obj docutils literal"><span class="pre">None</span></
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filepath</strong> : str (optional, Default: None)</p>
 <blockquote>
 <div><p>Path to the previously downloaded ‘mnist.pkl.gz’ file.
-If <code class="xref py py-obj docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
+If <code class="docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
 </div></blockquote>
 <p><strong>validation</strong> : boolean (optional, Default: False)</p>
 <blockquote>
@@ -388,7 +396,8 @@ or combine it into the training data (False).</p>
 </div></blockquote>
 <p><strong>validation_set</strong> : (n_valid, n_pixels) ndarray, (n_valid,) ndarray</p>
 <blockquote>
-<div><p>A tuple of the validation image array and label array (if <code class="xref py py-obj docutils literal"><span class="pre">validation</span></code>)</p>
+<div><p>A tuple of the validation image array and label array
+(if <code class="docutils literal"><span class="pre">validation</span></code>)</p>
 </div></blockquote>
 <p><strong>test_set</strong> : (n_test, n_pixels) ndarray, (n_test,) ndarray</p>
 <blockquote class="last">
@@ -411,7 +420,7 @@ or combine it into the training data (False).</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filepath</strong> : str (optional, Default: None)</p>
 <blockquote>
 <div><p>Path to the previously downloaded ‘svhn-py-colmajor.tar.gz’ file.
-If <code class="xref py py-obj docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
+If <code class="docutils literal"><span class="pre">None</span></code>, the file will be downloaded to the current directory.</p>
 </div></blockquote>
 <p><strong>n_train</strong> : int (optional, Default: 6)</p>
 <blockquote>
@@ -574,7 +583,7 @@ Toronto. pp. 48-49.</td></tr>
 </table>
 <dl class="class">
 <dt id="nengo_extras.keras.SoftLIF">
-<em class="property">class </em><code class="descclassname">nengo_extras.keras.</code><code class="descname">SoftLIF</code><span class="sig-paren">(</span><em>sigma=1.0</em>, <em>amplitude=1.0</em>, <em>tau_rc=0.02</em>, <em>tau_ref=0.002</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/keras.html#SoftLIF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.keras.SoftLIF" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">nengo_extras.keras.</code><code class="descname">SoftLIF</code><span class="sig-paren">(</span><em>sigma=1.0</em>, <em>amplitude=1.0</em>, <em>tau_rc=0.02</em>, <em>tau_ref=0.002</em>, <em>noise_model='none'</em>, <em>tau_s=0.005</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/keras.html#SoftLIF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.keras.SoftLIF" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -719,7 +728,7 @@ In ICLR 2016 (pp. 1-13).</td></tr>
 
 <dl class="class">
 <dt id="nengo_extras.deepnetworks.ConvLayer">
-<em class="property">class </em><code class="descclassname">nengo_extras.deepnetworks.</code><code class="descname">ConvLayer</code><span class="sig-paren">(</span><em>input_shape</em>, <em>filters</em>, <em>biases</em>, <em>strides=1</em>, <em>padding=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/deepnetworks.html#ConvLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.deepnetworks.ConvLayer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">nengo_extras.deepnetworks.</code><code class="descname">ConvLayer</code><span class="sig-paren">(</span><em>input_shape</em>, <em>filters</em>, <em>biases</em>, <em>strides=1</em>, <em>padding=0</em>, <em>border='ceil'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/deepnetworks.html#ConvLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.deepnetworks.ConvLayer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="class">
@@ -731,6 +740,101 @@ In ICLR 2016 (pp. 1-13).</td></tr>
 <dt id="nengo_extras.cuda_convnet.CudaConvnetNetwork">
 <em class="property">class </em><code class="descclassname">nengo_extras.cuda_convnet.</code><code class="descname">CudaConvnetNetwork</code><span class="sig-paren">(</span><em>model</em>, <em>synapse=None</em>, <em>lif_type='lif'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/cuda_convnet.html#CudaConvnetNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.cuda_convnet.CudaConvnetNetwork" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</div>
+<div class="section" id="processes">
+<h2>Processes<a class="headerlink" href="#processes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="nengo_extras.Conv2d">
+<em class="property">class </em><code class="descclassname">nengo_extras.</code><code class="descname">Conv2d</code><span class="sig-paren">(</span><em>shape_in</em>, <em>filters</em>, <em>biases=None</em>, <em>strides=1</em>, <em>padding=0</em>, <em>border='ceil'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/convnet.html#Conv2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.Conv2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform 2-D (image) convolution on an input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>shape_in</strong> : 3-tuple (n_channels, height, width)</p>
+<blockquote>
+<div><p>Shape of the input images: channels, height, width.</p>
+</div></blockquote>
+<p><strong>filters</strong> : array_like (n_filters, n_channels, f_height, f_width)</p>
+<blockquote>
+<div><p>Static filters to convolve with the input. Shape is number of filters,
+number of input channels, filter height, and filter width. Shape can
+also be (n_filters, height, width, n_channels, f_height, f_width)
+to apply different filters at each point in the image, where ‘height’
+and ‘width’ are the input image height and width.</p>
+</div></blockquote>
+<p><strong>biases</strong> : array_like (1,) or (n_filters,) or (n_filters, height, width)</p>
+<blockquote>
+<div><p>Biases to add to outputs. Can have one bias across the entire output
+space, one bias per filter, or a unique bias for each output pixel.</p>
+</div></blockquote>
+<p><strong>strides</strong> : 2-tuple (vertical, horizontal) or int</p>
+<blockquote>
+<div><p>Spacing between filter placements. If an integer
+is provided, the same spacing is used in both dimensions.</p>
+</div></blockquote>
+<p><strong>padding</strong> : 2-tuple (vertical, horizontal) or int</p>
+<blockquote class="last">
+<div><p>Amount of zero-padding around the outside of the input image. Padding
+is applied to both sides, e.g. <code class="docutils literal"><span class="pre">padding=(1,</span> <span class="pre">0)</span></code> will add one pixel
+of padding to the top and bottom, and none to the left and right.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="nengo_extras.Pool2d">
+<em class="property">class </em><code class="descclassname">nengo_extras.</code><code class="descname">Pool2d</code><span class="sig-paren">(</span><em>shape_in</em>, <em>pool_size</em>, <em>strides=None</em>, <em>kind='avg'</em>, <em>mode='full'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/convnet.html#Pool2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.Pool2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform 2-D (image) pooling on an input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>shape_in</strong> : 3-tuple (channels, height, width)</p>
+<blockquote>
+<div><p>Shape of the input image.</p>
+</div></blockquote>
+<p><strong>pool_size</strong> : 2-tuple (vertical, horizontal) or int</p>
+<blockquote>
+<div><p>Shape of the pooling region. If an integer is provided, the shape will
+be square with the given side length.</p>
+</div></blockquote>
+<p><strong>strides</strong> : 2-tuple (vertical, horizontal) or int</p>
+<blockquote>
+<div><p>Spacing between pooling placements. If <code class="docutils literal"><span class="pre">None</span></code> (default), will be
+equal to <code class="docutils literal"><span class="pre">pool_size</span></code> resulting in non-overlapping pooling.</p>
+</div></blockquote>
+<p><strong>kind</strong> : “avg” or “max”</p>
+<blockquote>
+<div><p>Type of pooling to perform: average pooling or max pooling.</p>
+</div></blockquote>
+<p><strong>mode</strong> : “full” or “valid”</p>
+<blockquote class="last">
+<div><p>If the input image does not divide into an integer number of pooling
+regions, whether to add partial pooling regions for the extra
+pixels (“full”), or discard extra input pixels (“valid”).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>shape_out</strong></td>
+<td>(3-tuple (channels, height, width)) Shape of the output image.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -745,7 +849,7 @@ In ICLR 2016 (pp. 1-13).</td></tr>
       </div>
     
       <div class="pull-right">
-        <a class="btn btn-default" href="deeplearning-examples.html" title="next chapter (use the right arrow)">Deep learning examples</a>
+        <a class="btn btn-default" href="examples/keras/mnist_spiking_cnn.html" title="next chapter (use the right arrow)">MNIST classifier with Keras and Nengo</a>
       </div>
     </div>
     <div class="clearer"></div>
@@ -760,12 +864,12 @@ In ICLR 2016 (pp. 1-13).</td></tr>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="deeplearning-examples.html" title="Deep learning examples"
+          <a href="examples/keras/mnist_spiking_cnn.html" title="MNIST classifier with Keras and Nengo"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Nengo extras"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">

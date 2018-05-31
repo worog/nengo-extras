@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.data &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.data &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -183,7 +179,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath : str (optional, Default: None)</span>
 <span class="sd">        Path to the previously downloaded &#39;cifar-10-python.tar.gz&#39; file.</span>
-<span class="sd">        If `None`, the file will be downloaded to the current directory.</span>
+<span class="sd">        If ``None``, the file will be downloaded to the current directory.</span>
 <span class="sd">    n_train : int (optional, Default: 6)</span>
 <span class="sd">        The number of training batches to load (max: 6).</span>
 <span class="sd">    n_test : int (optional, Default: 6)</span>
@@ -241,7 +237,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath : str (optional, Default: None)</span>
 <span class="sd">        Path to the previously downloaded &#39;cifar-100-python.tar.gz&#39; file.</span>
-<span class="sd">        If `None`, the file will be downloaded to the current directory.</span>
+<span class="sd">        If ``None``, the file will be downloaded to the current directory.</span>
 <span class="sd">    fine_labels : boolean (optional, Default: True)</span>
 <span class="sd">        Whether to provide the fine labels or coarse labels.</span>
 <span class="sd">    label_names : boolean (optional, Default: False)</span>
@@ -288,7 +284,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath : str (optional, Default: None)</span>
 <span class="sd">        Path to the previously downloaded &#39;ilsvrc-2012-batches-test3.tar.gz&#39;.</span>
-<span class="sd">        If `None`, the file will be downloaded to the current directory.</span>
+<span class="sd">        If ``None``, the file will be downloaded to the current directory.</span>
 <span class="sd">    n_files : int (optional, Default: None)</span>
 <span class="sd">        Number of files (batches) to load from the archive. Defaults to all.</span>
 
@@ -355,6 +351,19 @@
     <span class="k">return</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">data_mean</span><span class="p">,</span> <span class="n">label_names</span></div>
 
 
+<span class="k">def</span> <span class="nf">load_ilsvrc2012_metadata</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">get_ilsvrc2012_tar_gz</span><span class="p">()</span>
+
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r:gz&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="n">unpickle_tarfile</span><span class="p">(</span><span class="n">tar</span><span class="p">,</span> <span class="s1">&#39;batches.meta&#39;</span><span class="p">)</span>
+        <span class="n">data_mean</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;data_mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+        <span class="n">label_names</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_names&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">data_mean</span><span class="p">,</span> <span class="n">label_names</span>
+
+
 <div class="viewcode-block" id="load_mnist"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.data.load_mnist">[docs]</a><span class="k">def</span> <span class="nf">load_mnist</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Load the MNIST dataset.</span>
 
@@ -362,7 +371,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath : str (optional, Default: None)</span>
 <span class="sd">        Path to the previously downloaded &#39;mnist.pkl.gz&#39; file.</span>
-<span class="sd">        If `None`, the file will be downloaded to the current directory.</span>
+<span class="sd">        If ``None``, the file will be downloaded to the current directory.</span>
 <span class="sd">    validation : boolean (optional, Default: False)</span>
 <span class="sd">        Whether to provide the validation data as a separate set (True),</span>
 <span class="sd">        or combine it into the training data (False).</span>
@@ -372,7 +381,8 @@
 <span class="sd">    train_set : (n_train, n_pixels) ndarray, (n_train,) ndarray</span>
 <span class="sd">        A tuple of the training image array and label array.</span>
 <span class="sd">    validation_set : (n_valid, n_pixels) ndarray, (n_valid,) ndarray</span>
-<span class="sd">        A tuple of the validation image array and label array (if `validation`)</span>
+<span class="sd">        A tuple of the validation image array and label array</span>
+<span class="sd">        (if ``validation``)</span>
 <span class="sd">    test_set : (n_test, n_pixels) ndarray, (n_test,) ndarray</span>
 <span class="sd">        A tuple of the testing image array and label array.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -399,7 +409,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath : str (optional, Default: None)</span>
 <span class="sd">        Path to the previously downloaded &#39;svhn-py-colmajor.tar.gz&#39; file.</span>
-<span class="sd">        If `None`, the file will be downloaded to the current directory.</span>
+<span class="sd">        If ``None``, the file will be downloaded to the current directory.</span>
 <span class="sd">    n_train : int (optional, Default: 6)</span>
 <span class="sd">        The number of training batches to load (max: 6).</span>
 <span class="sd">    n_test : int (optional, Default: 6)</span>
@@ -627,7 +637,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

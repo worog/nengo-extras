@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.learning_rules &#8212; Nengo extras 0.1.0 docs</title>
+    <title>nengo_extras.learning_rules &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -70,16 +70,12 @@
     
       <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -121,11 +117,120 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">nengo.builder</span> <span class="k">import</span> <span class="n">Builder</span><span class="p">,</span> <span class="n">Signal</span>
-<span class="kn">from</span> <span class="nn">nengo.builder.operator</span> <span class="k">import</span> <span class="n">DotInc</span><span class="p">,</span> <span class="n">ElementwiseInc</span><span class="p">,</span> <span class="n">Reset</span><span class="p">,</span> <span class="n">SimPyFunc</span>
+<span class="kn">from</span> <span class="nn">nengo.builder.connection</span> <span class="k">import</span> <span class="n">get_eval_points</span><span class="p">,</span> <span class="n">solve_for_decoders</span>
+<span class="kn">from</span> <span class="nn">nengo.builder.operator</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">DotInc</span><span class="p">,</span> <span class="n">ElementwiseInc</span><span class="p">,</span> <span class="n">Operator</span><span class="p">,</span> <span class="n">Reset</span><span class="p">,</span> <span class="n">SimPyFunc</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">nengo.exceptions</span> <span class="k">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span> <span class="nn">nengo.learning_rules</span> <span class="k">import</span> <span class="n">LearningRuleType</span>
 <span class="kn">from</span> <span class="nn">nengo.params</span> <span class="k">import</span> <span class="n">EnumParam</span><span class="p">,</span> <span class="n">FunctionParam</span><span class="p">,</span> <span class="n">NumberParam</span>
 <span class="kn">from</span> <span class="nn">nengo.synapses</span> <span class="k">import</span> <span class="n">Lowpass</span>
+
+
+<div class="viewcode-block" id="AML"><a class="viewcode-back" href="../../learning_rules.html#nengo_extras.learning_rules.AML">[docs]</a><span class="k">class</span> <span class="nc">AML</span><span class="p">(</span><span class="n">LearningRuleType</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Association matrix learning rule (AML).</span>
+
+<span class="sd">    Enables one-shot learning without catastrophic forgetting of outer product</span>
+<span class="sd">    association matrices.</span>
+
+<span class="sd">    The cue is provided by the pre-synaptic ensemble. The error signal is split</span>
+<span class="sd">    up: ``error[0]`` provides a scaling factor to the learning rate.</span>
+<span class="sd">    ``error[1]`` provides a decay rate (i.e., weights are multiplied with this</span>
+<span class="sd">    value in every time step), ``error[2:]`` provides the target vector.</span>
+
+<span class="sd">    The update is given by::</span>
+
+<span class="sd">        decoders[...] *= error[1]  # decay</span>
+<span class="sd">        decoders[...] += alpha * error[0] * error[2:, None] * np.dot(</span>
+<span class="sd">            pre, base_decoders.T)</span>
+
+<span class="sd">    where *alpha* is the learning rate adjusted for *dt* and *base_decoders*</span>
+<span class="sd">    is the decoder matrix for decoding the identity from the pre-ensemble.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    d : int</span>
+<span class="sd">        Dimensionality of input and output vectors (error signal will be</span>
+<span class="sd">        *d+2*).</span>
+<span class="sd">    learning_rate : float, optional</span>
+<span class="sd">        Learning rate (increase of dot product similarity per second).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">error_type</span> <span class="o">=</span> <span class="s1">&#39;decoded&#39;</span>
+    <span class="n">modifies</span> <span class="o">=</span> <span class="s1">&#39;decoders&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AML</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">size_in</span><span class="o">=</span><span class="n">d</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">SimAML</span><span class="p">(</span><span class="n">Operator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">base_decoders</span><span class="p">,</span> <span class="n">pre</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span>
+                 <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SimAML</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_decoders</span> <span class="o">=</span> <span class="n">base_decoders</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reads</span> <span class="o">=</span> <span class="p">[</span><span class="n">pre</span><span class="p">,</span> <span class="n">error</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updates</span> <span class="o">=</span> <span class="p">[</span><span class="n">decoders</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">make_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+        <span class="n">base_decoders</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_decoders</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pre</span><span class="p">]</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">]</span>
+        <span class="n">decoders</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decoders</span><span class="p">]</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dt</span>
+
+        <span class="k">def</span> <span class="nf">step_assoc_learning</span><span class="p">():</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">decay</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">decoders</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">*=</span> <span class="n">decay</span>
+            <span class="n">decoders</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">target</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+                <span class="n">pre</span><span class="p">,</span> <span class="n">base_decoders</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">step_assoc_learning</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pre</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reads</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reads</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">decoders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">updates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="nd">@Builder</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">AML</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_aml</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">aml</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">connection</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">seeds</span><span class="p">[</span><span class="n">conn</span><span class="p">])</span>
+
+    <span class="n">error</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">size_in</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;aml:error&quot;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="n">Reset</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">sig</span><span class="p">[</span><span class="n">rule</span><span class="p">][</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
+
+    <span class="n">pre</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sig</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">pre_obj</span><span class="p">][</span><span class="s1">&#39;in&#39;</span><span class="p">]</span>
+    <span class="n">decoders</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sig</span><span class="p">[</span><span class="n">conn</span><span class="p">][</span><span class="s1">&#39;weights&#39;</span><span class="p">]</span>
+
+    <span class="n">encoders</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">pre_obj</span><span class="p">]</span><span class="o">.</span><span class="n">encoders</span>
+    <span class="n">gain</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">pre_obj</span><span class="p">]</span><span class="o">.</span><span class="n">gain</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">pre_obj</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span>
+
+    <span class="n">eval_points</span> <span class="o">=</span> <span class="n">get_eval_points</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">eval_points</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eval_points</span><span class="p">,</span> <span class="n">encoders</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="n">wrapped_solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">decoder_cache</span><span class="o">.</span><span class="n">wrap_solver</span><span class="p">(</span><span class="n">solve_for_decoders</span><span class="p">)</span>
+                      <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">seeded</span><span class="p">[</span><span class="n">conn</span><span class="p">]</span> <span class="k">else</span> <span class="n">solve_for_decoders</span><span class="p">)</span>
+    <span class="n">base_decoders</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">wrapped_solver</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="n">SimAML</span><span class="p">(</span>
+        <span class="n">aml</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">base_decoders</span><span class="p">,</span> <span class="n">pre</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">decoders</span><span class="p">))</span>
 
 
 <span class="k">class</span> <span class="nc">DeltaRuleFunctionParam</span><span class="p">(</span><span class="n">FunctionParam</span><span class="p">):</span>
@@ -160,8 +265,8 @@
 <span class="sd">        \delta W_ij = \eta a_j e_i f(u_i)</span>
 
 <span class="sd">    where ``e_i`` is the input error in the postsynaptic neuron space,</span>
-<span class="sd">    ``a_j`` is the jth presynaptic neuron (output) activity,</span>
-<span class="sd">    ``u_i`` is the ith postsynaptic neuron input,</span>
+<span class="sd">    ``a_j`` is the output activity for presynaptic neuron j,</span>
+<span class="sd">    ``u_i`` is the input for postsynaptic neuron i,</span>
 <span class="sd">    and ``f`` is a provided function.</span>
 
 <span class="sd">    Parameters</span>
@@ -275,7 +380,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

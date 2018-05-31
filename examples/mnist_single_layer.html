@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Encoding for image recognition &#8212; Nengo extras 0.1.0 docs</title>
+    <title>Encoding for image recognition &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,8 +34,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/config/TeX-AMS-MML_HTMLorMML.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualization tools" href="../visualization.html" />
-    <link rel="prev" title="Vision examples" href="../vision-examples.html" />
+    <link rel="next" title="Classifying webcam images" href="cuda_convnet/webcam_spiking_cnn.html" />
+    <link rel="prev" title="Vision models" href="../vision.html" />
 <link rel="stylesheet" type="text/css" href="../_static/custom.css">
 
 
@@ -51,13 +51,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../visualization.html" title="Visualization tools"
+          <a href="cuda_convnet/webcam_spiking_cnn.html" title="Classifying webcam images"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../vision-examples.html" title="Vision examples"
+          <a href="../vision.html" title="Vision models"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../vision-examples.html" accesskey="U">Vision examples</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../vision.html" accesskey="U">Vision models</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -68,7 +68,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -78,22 +78,24 @@
     
       <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../processes.html">Processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vision.html">Vision models</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../vision-examples.html">Vision examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../vision-examples.html#classifying-mnist-with-nengo">Classifying MNIST with Nengo</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#"> As a notebook</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../vision.html">Vision models</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Encoding for image recognition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Load-and-preprocess-the-data">Load and preprocess the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Create-the-network">Create the network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Normally-distributed-encoders">Normally distributed encoders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Normally-distributed-sparse-encoders">Normally distributed sparse encoders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Gabor-filter-encoders">Gabor filter encoders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Sparse-Gabor-filter-encoders">Sparse Gabor filter encoders</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../vision.html#camera-input">Camera input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -121,7 +123,7 @@
             <ol class="breadcrumb">
               <li><a href="../index.html">Docs</a></li>
               
-                <li><a href="../vision-examples.html">Vision examples</a></li>
+                <li><a href="../vision.html">Vision models</a></li>
               
               <li>Encoding for image recognition</li>
             </ol>
@@ -295,8 +297,8 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 </style>
-<div class="section" id="encoding-for-image-recognition">
-<h1>Encoding for image recognition<a class="headerlink" href="#encoding-for-image-recognition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Encoding-for-image-recognition">
+<h1>Encoding for image recognition<a class="headerlink" href="#Encoding-for-image-recognition" title="Permalink to this headline">¶</a></h1>
 <p>As we will see in this notebook, on the relatively easy MNIST image
 recognition dataset, we can use NEF decoding methods to do quite well.
 However, this performance depends on a judicious choice of encoders.
@@ -304,12 +306,11 @@ This notebook explores how encoder choice affects performance on an
 image categorization task.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">nengo</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -321,8 +322,8 @@ image categorization task.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="load-and-preprocess-the-data">
-<h2>Load and preprocess the data<a class="headerlink" href="#load-and-preprocess-the-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Load-and-preprocess-the-data">
+<h2>Load and preprocess the data<a class="headerlink" href="#Load-and-preprocess-the-data" title="Permalink to this headline">¶</a></h2>
 <p>First, we load the MNIST data, and preprocess it to lie within the range
 [-1, 1] (by default, it is in the range [0, 1]).</p>
 <p>Then, we generate a set of training targets, <code class="docutils literal"><span class="pre">T_train</span></code>. The
@@ -332,9 +333,9 @@ example; that is, for each example, we have a 10-dimensional vector
 where only one element is one (corresponding to the class of that
 example) and all other elements are zero. Five examples of this are
 printed in the output below.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -347,16 +348,27 @@ printed in the output below.</p>
 <span class="n">X_test</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_test</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># normalize to -1 to 1</span>
 
 <span class="n">T_train</span> <span class="o">=</span> <span class="n">one_hot_from_labels</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="c1">#T_test = one_hot_from_labels(y_test, classes=10)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> -&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">T_train</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="section" id="create-the-network">
-<h2>Create the network<a class="headerlink" href="#create-the-network" title="Permalink to this headline">¶</a></h2>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+5 -&gt; [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+0 -&gt; [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+4 -&gt; [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+1 -&gt; [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+9 -&gt; [0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Create-the-network">
+<h2>Create the network<a class="headerlink" href="#Create-the-network" title="Permalink to this headline">¶</a></h2>
 <p>We now create our network. It has one ensemble, <code class="docutils literal"><span class="pre">a</span></code>, that encodes the
 input images using neurons, and a connection <code class="docutils literal"><span class="pre">conn</span></code> out of this
 ensemble that decodes the classification.</p>
@@ -364,12 +376,12 @@ ensemble that decodes the classification.</p>
 results are only affected by the different encoder choices.</p>
 <p>We create a function <code class="docutils literal"><span class="pre">get_outs</span></code> that returns the output of the network
 given a <code class="docutils literal"><span class="pre">Simulator</span></code> object, so that we can evaluate the network
-statically on many images (i.e. we don’t need to run the simulator in
+statically on many images (i.e.&nbsp;we don’t need to run the simulator in
 time, we just use the encoders and decoders created during the build
 process).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -377,7 +389,8 @@ process).</p>
 <span class="n">n_vis</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">n_out</span> <span class="o">=</span> <span class="n">T_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="c1"># number of hidden units. More means better performance but longer training time.</span>
+<span class="c1"># number of hidden units</span>
+<span class="c1"># More means better performance but longer training time.</span>
 <span class="n">n_hid</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">ens_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -385,7 +398,7 @@ process).</p>
     <span class="n">neuron_type</span><span class="o">=</span><span class="n">nengo</span><span class="o">.</span><span class="n">LIFRate</span><span class="p">(),</span>
     <span class="n">intercepts</span><span class="o">=</span><span class="n">nengo</span><span class="o">.</span><span class="n">dists</span><span class="o">.</span><span class="n">Choice</span><span class="p">([</span><span class="mf">0.1</span><span class="p">]),</span>
     <span class="n">max_rates</span><span class="o">=</span><span class="n">nengo</span><span class="o">.</span><span class="n">dists</span><span class="o">.</span><span class="n">Choice</span><span class="p">([</span><span class="mi">100</span><span class="p">]),</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 
 <span class="n">solver</span> <span class="o">=</span> <span class="n">nengo</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">LstsqL2</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
@@ -404,10 +417,12 @@ process).</p>
     <span class="c1"># decode the ensemble activities using the connection&#39;s decoders</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">acts</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">conn</span><span class="p">]</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
+
 <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
     <span class="c1"># the classification for each example is index of</span>
     <span class="c1"># the output dimension with the highest value</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">get_outs</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">images</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">labels</span>
+
 
 <span class="k">def</span> <span class="nf">print_error</span><span class="p">(</span><span class="n">sim</span><span class="p">):</span>
     <span class="n">train_error</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">get_error</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -417,19 +432,19 @@ process).</p>
 </div>
 </div>
 </div>
-<div class="section" id="normally-distributed-encoders">
-<h2>Normally distributed encoders<a class="headerlink" href="#normally-distributed-encoders" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Normally-distributed-encoders">
+<h2>Normally distributed encoders<a class="headerlink" href="#Normally-distributed-encoders" title="Permalink to this headline">¶</a></h2>
 <p>These are the standard encoders used in the NEF. Since our data is
 high-dimensional, they have a lot of space to cover, and do not work
 particularly well, as shown by the training and testing errors.</p>
 <p>Samples of these encoders are shown in the plot.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">encoders</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_hid</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">))</span>
+<span></span><span class="n">encoders</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_hid</span><span class="p">,</span> <span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">))</span>
 <span class="n">a</span><span class="o">.</span><span class="n">encoders</span> <span class="o">=</span> <span class="n">encoders</span>
 
 <span class="n">tile</span><span class="p">(</span><span class="n">encoders</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">rows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -439,15 +454,87 @@ particularly well, as shown by the training and testing errors.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="section" id="normally-distributed-sparse-encoders">
-<h2>Normally distributed sparse encoders<a class="headerlink" href="#normally-distributed-sparse-encoders" title="Permalink to this headline">¶</a></h2>
+<div class="output_area docutils container">
+<div id="39a1836b-a09c-4a80-a212-b4030fcb4803" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('39a1836b-a09c-4a80-a212-b4030fcb4803');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Build finished in 0:00:02.';
+
+            fill.style.width = '100%';
+            fill.style.animation = 'pb-fill-anim 2s linear infinite';
+            fill.style.backgroundSize = '100px 100%';
+            fill.style.backgroundImage = 'repeating-linear-gradient(' +
+                '90deg, #bdd2e6, #edf2f8 40%, #bdd2e6 80%, #bdd2e6)';
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Train/test error: 6.82%, 7.09%
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_mnist_single_layer_7_3.png" src="../_images/examples_mnist_single_layer_7_3.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Normally-distributed-sparse-encoders">
+<h2>Normally distributed sparse encoders<a class="headerlink" href="#Normally-distributed-sparse-encoders" title="Permalink to this headline">¶</a></h2>
 <p>The same as before, but now each encoder has a limited receptive field.
 This makes each neuron only responsible for part of the image, and
 allows them to work together better to encode the whole image.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -462,19 +549,91 @@ allows them to work together better to encode the whole image.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="section" id="gabor-filter-encoders">
-<h2>Gabor filter encoders<a class="headerlink" href="#gabor-filter-encoders" title="Permalink to this headline">¶</a></h2>
+<div class="output_area docutils container">
+<div id="b8b8fb96-5702-4544-8d52-203e84a106ba" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('b8b8fb96-5702-4544-8d52-203e84a106ba');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Build finished in 0:00:02.';
+
+            fill.style.width = '100%';
+            fill.style.animation = 'pb-fill-anim 2s linear infinite';
+            fill.style.backgroundSize = '100px 100%';
+            fill.style.backgroundImage = 'repeating-linear-gradient(' +
+                '90deg, #bdd2e6, #edf2f8 40%, #bdd2e6 80%, #bdd2e6)';
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Train/test error: 5.10%, 4.83%
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_mnist_single_layer_9_3.png" src="../_images/examples_mnist_single_layer_9_3.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Gabor-filter-encoders">
+<h2>Gabor filter encoders<a class="headerlink" href="#Gabor-filter-encoders" title="Permalink to this headline">¶</a></h2>
 <p>Neurons in primary visual cortex have tuning that resembles Gabor
-filters. This is because natural images are somewhat smooth: There is a
+filters. This is because natural images are somewhat smooth; there is a
 correlation between a pixel’s value and that of adjacent pixels.</p>
 <p>First, we use Gabor filters over the whole image, which does not work
-particularly well since a) each neuron is now responsible for the whole
-image again, and b) the statistics of the resulting Gabor filters do not
-match the statistics of the images.</p>
-<div class="nbinput nblast docutils container">
+particularly well because a) each neuron is now responsible for the
+whole image again, and b) the statistics of the resulting Gabor filters
+do not match the statistics of the images.</p>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -488,14 +647,87 @@ match the statistics of the images.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="sparse-gabor-filter-encoders">
-<h3>Sparse Gabor filter encoders<a class="headerlink" href="#sparse-gabor-filter-encoders" title="Permalink to this headline">¶</a></h3>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div id="448e911a-7daf-4f93-a257-7299c3daef55" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('448e911a-7daf-4f93-a257-7299c3daef55');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Build finished in 0:00:02.';
+
+            fill.style.width = '100%';
+            fill.style.animation = 'pb-fill-anim 2s linear infinite';
+            fill.style.backgroundSize = '100px 100%';
+            fill.style.backgroundImage = 'repeating-linear-gradient(' +
+                '90deg, #bdd2e6, #edf2f8 40%, #bdd2e6 80%, #bdd2e6)';
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Train/test error: 8.28%, 8.36%
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_mnist_single_layer_11_3.png" src="../_images/examples_mnist_single_layer_11_3.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Sparse-Gabor-filter-encoders">
+<h2>Sparse Gabor filter encoders<a class="headerlink" href="#Sparse-Gabor-filter-encoders" title="Permalink to this headline">¶</a></h2>
 <p>Using Gabor filters that only cover part of the image results in the
 best performance. These filters are able to work together to encode the
 image, and their statistics roughly match those of the input images.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [ ]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -510,6 +742,77 @@ image, and their statistics roughly match those of the input images.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div id="68bb9efb-c44b-4730-9ec8-c50a512839bf" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('68bb9efb-c44b-4730-9ec8-c50a512839bf');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Build finished in 0:00:02.';
+
+            fill.style.width = '100%';
+            fill.style.animation = 'pb-fill-anim 2s linear infinite';
+            fill.style.backgroundSize = '100px 100%';
+            fill.style.backgroundImage = 'repeating-linear-gradient(' +
+                '90deg, #bdd2e6, #edf2f8 40%, #bdd2e6 80%, #bdd2e6)';
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Train/test error: 2.67%, 2.80%
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_mnist_single_layer_13_3.png" src="../_images/examples_mnist_single_layer_13_3.png" />
+</div>
 </div>
 </div>
 </div>
@@ -520,11 +823,11 @@ image, and their statistics roughly match those of the input images.</p>
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="../vision-examples.html" title="previous chapter (use the left arrow)">Vision examples</a>
+        <a class="btn btn-default" href="../vision.html" title="previous chapter (use the left arrow)">Vision models</a>
       </div>
     
       <div class="pull-right">
-        <a class="btn btn-default" href="../visualization.html" title="next chapter (use the right arrow)">Visualization tools</a>
+        <a class="btn btn-default" href="cuda_convnet/webcam_spiking_cnn.html" title="next chapter (use the right arrow)">Classifying webcam images</a>
       </div>
     </div>
     <div class="clearer"></div>
@@ -539,13 +842,13 @@ image, and their statistics roughly match those of the input images.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../visualization.html" title="Visualization tools"
+          <a href="cuda_convnet/webcam_spiking_cnn.html" title="Classifying webcam images"
              >next</a> |</li>
         <li class="right" >
-          <a href="../vision-examples.html" title="Vision examples"
+          <a href="../vision.html" title="Vision models"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../vision-examples.html" >Vision examples</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../vision.html" >Vision models</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">

@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Visualization tools &#8212; Nengo extras 0.1.0 docs</title>
+    <title>Visualization tools &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,8 +34,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/config/TeX-AMS-MML_HTMLorMML.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Visualization examples" href="visualization-examples.html" />
-    <link rel="prev" title="Encoding for image recognition" href="examples/mnist_single_layer.html" />
+    <link rel="next" title="Visualizing Nengo networks with Gephi" href="gephi-tutorial.html" />
+    <link rel="prev" title="Classifying webcam images" href="examples/cuda_convnet/webcam_spiking_cnn.html" />
 <link rel="stylesheet" type="text/css" href="_static/custom.css">
 
 
@@ -51,12 +51,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="visualization-examples.html" title="Visualization examples"
+          <a href="gephi-tutorial.html" title="Visualizing Nengo networks with Gephi"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="examples/mnist_single_layer.html" title="Encoding for image recognition"
+          <a href="examples/cuda_convnet/webcam_spiking_cnn.html" title="Classifying webcam images"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -67,7 +67,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    index.html" class="text-logo">Nengo extras 0.1</a>
+    index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -77,22 +77,22 @@
     
       <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vision-examples.html">Vision examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gephi-tutorial.html">Visualizing Nengo networks with Gephi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/plot_spikes.html">Creating spike raster plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/cuda_convnet/imagenet_visualization.html">Visualizing the ImageNet classifier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#graphviz-diagrams">GraphViz diagrams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#image-manipulation">Image manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#matplotlib-plots">Matplotlib plots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tkinter-guis">TkInter GUIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gephi-visualization">Gephi visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="visualization-examples.html">Visualization examples</a></li>
 </ul>
 
     
@@ -128,6 +128,14 @@
             
   <div class="section" id="visualization-tools">
 <h1>Visualization tools<a class="headerlink" href="#visualization-tools" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Examples and tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gephi-tutorial.html">Visualizing Nengo networks with Gephi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/plot_spikes.html">Creating spike raster plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/cuda_convnet/imagenet_visualization.html">Visualizing the ImageNet classifier</a></li>
+</ul>
+</div>
 <div class="section" id="graphviz-diagrams">
 <h2>GraphViz diagrams<a class="headerlink" href="#graphviz-diagrams" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="longtable docutils">
@@ -748,6 +756,342 @@ individually.</p>
 <dd></dd></dl>
 
 </div>
+<div class="section" id="gephi-visualization">
+<h2>Gephi visualization<a class="headerlink" href="#gephi-visualization" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nengo_extras.gexf.DispatchTable" title="nengo_extras.gexf.DispatchTable"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.gexf.DispatchTable</span></code></a>([parent])</td>
+<td>A descriptor to dispatch to other methods depending on argument type.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nengo_extras.gexf.HierarchicalLabeler" title="nengo_extras.gexf.HierarchicalLabeler"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.gexf.HierarchicalLabeler</span></code></a>()</td>
+<td>Obtains labels for objects in a Nengo network.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nengo_extras.gexf.GexfConverter" title="nengo_extras.gexf.GexfConverter"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.gexf.GexfConverter</span></code></a>([labeler,&nbsp;…])</td>
+<td>Converts Nengo models into GEXF files.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nengo_extras.gexf.CollapsingGexfConverter" title="nengo_extras.gexf.CollapsingGexfConverter"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.gexf.CollapsingGexfConverter</span></code></a>([…])</td>
+<td>Converts Nengo models into GEXF files with some collapsed networks.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nengo_extras.gexf.Attr" title="nengo_extras.gexf.Attr"><code class="xref py py-obj docutils literal"><span class="pre">nengo_extras.gexf.Attr</span></code></a>(id,&nbsp;type,&nbsp;default)</td>
+<td>Create new instance of Attr(id, type, default)</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="nengo_extras.gexf.DispatchTable">
+<em class="property">class </em><code class="descclassname">nengo_extras.gexf.</code><code class="descname">DispatchTable</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#DispatchTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.DispatchTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>A descriptor to dispatch to other methods depending on argument type.</p>
+<p>How to use: assign the descriptor to a class attribute and use the
+<code class="docutils literal"><span class="pre">register</span></code> decorator to declare which functions to dispatch to
+for specific types:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">dispatch</span> <span class="o">=</span> <span class="n">DispatchTable</span><span class="p">()</span>
+
+    <span class="nd">@dispatch</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">TypeA</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">handle_type_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_of_type_a</span><span class="p">):</span>
+        <span class="c1"># ...</span>
+
+    <span class="nd">@dispatch</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">TypeB</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">handle_type_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_of_type_b</span><span class="p">):</span>
+        <span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>To then call the method for the appropriate type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">inst</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="n">inst</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">obj_of_type_a_or_b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If multiple methods would match (e.g. if <em>TypeB</em> inherits from <em>TypeA</em>),
+the most specific method will be used (to be precise: the first type in the
+method resolution order with a registered method will be used).</p>
+<p>The <em>DispatchTable</em> descriptor accepts another <em>DispatchTable</em> as argument
+which will be used as a fallback. This allows to inherit the dispatch
+table and selectively overwrite methods like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Inherited</span><span class="p">(</span><span class="n">MyClass</span><span class="p">):</span>
+    <span class="n">dispatch</span> <span class="o">=</span> <span class="n">DispatchTable</span><span class="p">(</span><span class="n">MyClass</span><span class="o">.</span><span class="n">dispatch</span><span class="p">)</span>
+
+    <span class="nd">@dispatch</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">TypeA</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">alternate_type_a_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_of_type_a</span><span class="p">):</span>
+        <span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>Finally, dispatch methods can also be changed on a per-instance basis:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">inst</span><span class="o">.</span><span class="n">dispatch</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">TypeA</span><span class="p">,</span> <span class="n">inst_type_a_handler</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="nengo_extras.gexf.DispatchTable.InstDispatch">
+<em class="property">class </em><code class="descname">InstDispatch</code><span class="sig-paren">(</span><em>param</em>, <em>inst</em>, <em>owner</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#DispatchTable.InstDispatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.DispatchTable.InstDispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value when accessing the dispatch table on an instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nengo_extras.gexf.HierarchicalLabeler">
+<em class="property">class </em><code class="descclassname">nengo_extras.gexf.</code><code class="descname">HierarchicalLabeler</code><a class="reference internal" href="_modules/nengo_extras/gexf.html#HierarchicalLabeler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.HierarchicalLabeler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains labels for objects in a Nengo network.</p>
+<p>The names will include the network hierarchy.</p>
+<p>Usage example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">HierarchicalLabeler</span><span class="p">()</span><span class="o">.</span><span class="n">get_labels</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="nengo_extras.gexf.GexfConverter">
+<em class="property">class </em><code class="descclassname">nengo_extras.gexf.</code><code class="descname">GexfConverter</code><span class="sig-paren">(</span><em>labeler=None</em>, <em>hierarchical=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts Nengo models into GEXF files.</p>
+<p>This can be loaded in Gephi for visualization of the model graph.</p>
+<p>Links:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://gephi.org/">Gephi</a></li>
+<li><a class="reference external" href="https://github.com/gephi/gexf/wiki">GEXF</a></li>
+</ul>
+<p>This class can be inherited from to customize the conversion or
+alternatively the <code class="docutils literal"><span class="pre">dispatch</span></code> table can be changed on a
+per-instance basis.</p>
+<p>Note that probes are currently not included in the graph.</p>
+<p>The following attributes will be stored on graph nodes:</p>
+<ul class="simple">
+<li><em>type</em>: type of the Nengo object (e.g., <em>nengo.ensemble.Ensemble</em>),</li>
+<li><em>net</em>: unique ID of the containing network,</li>
+<li><em>net_label</em>: (possibly non-unique) label of the containing network,</li>
+<li><em>size_in</em>: input size,</li>
+<li><em>size_out</em>: output_size,</li>
+<li><em>radius</em>: ensemble radius (unset for other nodes),</li>
+<li><em>n_neurons</em>: number of neurons (0 for non-ensembles),</li>
+<li><em>neuron_type</em>: string representation of the neuron type (unset for
+non-ensembles).</li>
+</ul>
+<p>The following attributes will be stored on graph edges:</p>
+<ul class="simple">
+<li><em>pre_type</em>: type of the connection’s pre object (e.g.,
+<em>nengo.ensemble.Neurons</em>),</li>
+<li><em>post_type</em>: type of the connection’s post object (e.g.,
+<em>nengo.ensemble.Neurons</em>),</li>
+<li><em>synapse</em>: string representation of the synapse,</li>
+<li><em>tau</em>: the tau parameter of the synapse if existent,</li>
+<li><em>function</em>: string representation of the connection’s function,</li>
+<li><em>transform</em>: string representation of the connection’s transform,</li>
+<li><em>scalar_transform</em>: float representation of the transform if it is a
+scalar,</li>
+<li><em>learning_rule_type</em>: string representation of the connection’s learning
+rule type.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>labeler</strong> : optional</p>
+<blockquote>
+<div><p>Object with a <code class="docutils literal"><span class="pre">get_labels</span></code> method that returns a dictionary mapping
+model objects to labels. If not given, a new <a class="reference internal" href="#nengo_extras.gexf.HierarchicalLabeler" title="nengo_extras.gexf.HierarchicalLabeler"><code class="xref py py-obj docutils literal"><span class="pre">HierarchicalLabeler</span></code></a>
+will be used.</p>
+</div></blockquote>
+<p><strong>hierarchical</strong> : bool, optional (default: False)</p>
+<blockquote class="last">
+<div><p>Whether to include information of the network hierarchy in the file.
+Support for hierarchical graphs was removed in Gephi 0.9 and
+hierarchical networks will be automatically flattened which leaves an
+unconnected node for every network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Basic usage to write a GEXF file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GexfConverter</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;model.gexf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.convert">
+<code class="descname">convert</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a model to GEXF format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xml.etree.ElementTree.ElementTree</p>
+<blockquote class="last">
+<div><p>Converted model.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.make_document">
+<code class="descname">make_document</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.make_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.make_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the GEXF XML document from <em>model</em>.</p>
+<p>This method is exposed so it can be overwritten in inheriting classes.
+Invoke <a class="reference internal" href="#nengo_extras.gexf.GexfConverter.convert" title="nengo_extras.gexf.GexfConverter.convert"><code class="xref py py-obj docutils literal"><span class="pre">convert</span></code></a> instead of this method to convert a model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xml.etree.ElementTree.ElementTree</p>
+<blockquote class="last">
+<div><p>Converted model.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.make_attr_defs">
+<code class="descname">make_attr_defs</code><span class="sig-paren">(</span><em>cls</em>, <em>defs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.make_attr_defs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.make_attr_defs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an attribute definition block.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cls</strong> : str</p>
+<blockquote>
+<div><p>Class the attribute definitions are for (‘node’ or ‘edge’).</p>
+</div></blockquote>
+<p><strong>defs</strong> : dict</p>
+<blockquote>
+<div><p>Attribute definitions. Maps attribute names to <a class="reference internal" href="#nengo_extras.gexf.Attr" title="nengo_extras.gexf.Attr"><code class="xref py py-obj docutils literal"><span class="pre">Attr</span></code></a> instances.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">xml.etree.ElementTree.Element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.make_attrs">
+<code class="descname">make_attrs</code><span class="sig-paren">(</span><em>defs</em>, <em>attrs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.make_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.make_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a block of attribute values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defs</strong> : dict</p>
+<blockquote>
+<div><p>Attribute definitions. Maps attribute names to <a class="reference internal" href="#nengo_extras.gexf.Attr" title="nengo_extras.gexf.Attr"><code class="xref py py-obj docutils literal"><span class="pre">Attr</span></code></a> instances.</p>
+</div></blockquote>
+<p><strong>attrs</strong> : dict</p>
+<blockquote>
+<div><p>Mapping of attribute names to assigned values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">xml.etree.ElementTree.Element</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.make_node">
+<code class="descname">make_node</code><span class="sig-paren">(</span><em>obj</em>, <em>**attrs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.make_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.make_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a node for <em>obj</em> with attributes <em>attrs</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.make_edge">
+<code class="descname">make_edge</code><span class="sig-paren">(</span><em>obj</em>, <em>source</em>, <em>target</em>, <em>**attrs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.make_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.make_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge for <em>obj</em> from <em>source</em> to <em>target</em> with attributes <em>attrs</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nengo_extras.gexf.GexfConverter.get_node_obj">
+<code class="descname">get_node_obj</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#GexfConverter.get_node_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.GexfConverter.get_node_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an object with a corresponding graph node related to <em>obj</em>.</p>
+<p>For certain objects like <a class="reference external" href="https://www.nengo.ai/nengo/frontend_api.html#nengo.ensemble.Neurons" title="(in Nengo v2.6)"><code class="xref py py-obj docutils literal"><span class="pre">nengo.ensemble.Neurons</span></code></a> or
+<a class="reference external" href="https://www.nengo.ai/nengo/frontend_api.html#nengo.connection.LearningRule" title="(in Nengo v2.6)"><code class="xref py py-obj docutils literal"><span class="pre">nengo.connection.LearningRule</span></code></a> no graph node will be created. This
+function will resolve such an object to a related object that has a
+corresponding graph node (e.g., the ensemble for a neurons object or
+the pre object for a learning rule).</p>
+<p>In <a class="reference internal" href="#nengo_extras.gexf.GexfConverter" title="nengo_extras.gexf.GexfConverter"><code class="xref py py-obj docutils literal"><span class="pre">GexfConverter</span></code></a> this is used to make sure connections are between
+the correct nodes and do not introduce unrelated dangling nodes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nengo_extras.gexf.CollapsingGexfConverter">
+<em class="property">class </em><code class="descclassname">nengo_extras.gexf.</code><code class="descname">CollapsingGexfConverter</code><span class="sig-paren">(</span><em>to_collapse=None</em>, <em>labeler=None</em>, <em>hierarchical=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#CollapsingGexfConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.CollapsingGexfConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts Nengo models into GEXF files with some collapsed networks.</p>
+<p>See <a class="reference internal" href="#nengo_extras.gexf.GexfConverter" title="nengo_extras.gexf.GexfConverter"><code class="xref py py-obj docutils literal"><span class="pre">GexfConverter</span></code></a> for general information on conversion to GEXF files.
+This class will collapse certain networks to a single node in the
+conversion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>to_collapse</strong> : sequence, optional</p>
+<blockquote>
+<div><p>Network types to collapse, if not given the networks listed in
+<code class="docutils literal"><span class="pre">NENGO_NETS</span></code> and <code class="docutils literal"><span class="pre">SPA_NETS</span></code> will be collapsed. Note that
+<code class="docutils literal"><span class="pre">SPA_NETS</span></code> currently only contains networks from <em>nengo_spa</em>,
+but not the <em>spa</em> module in core <em>nengo</em>.</p>
+</div></blockquote>
+<p><strong>labeler</strong> : optional</p>
+<blockquote>
+<div><p>Object with a <code class="docutils literal"><span class="pre">get_labels</span></code> method that returns a dictionary mapping
+model objects to labels. If not given, a new <a class="reference internal" href="#nengo_extras.gexf.HierarchicalLabeler" title="nengo_extras.gexf.HierarchicalLabeler"><code class="xref py py-obj docutils literal"><span class="pre">HierarchicalLabeler</span></code></a>
+will be used.</p>
+</div></blockquote>
+<p><strong>hierarchical</strong> : bool, optional (default: False)</p>
+<blockquote class="last">
+<div><p>Whether to include information of the network hierarchy in the file.
+Support for hierarchical graphs was removed in Gephi 0.9 and
+hierarchical networks will be automatically flattened which leaves an
+unconnected node for every network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nengo_extras.gexf.CollapsingGexfConverter.convert_collapsed">
+<code class="descname">convert_collapsed</code><span class="sig-paren">(</span><em>net</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nengo_extras/gexf.html#CollapsingGexfConverter.convert_collapsed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nengo_extras.gexf.CollapsingGexfConverter.convert_collapsed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to convert a network into a collapsed graph node.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nengo_extras.gexf.Attr">
+<em class="property">class </em><code class="descclassname">nengo_extras.gexf.</code><code class="descname">Attr</code><span class="sig-paren">(</span><em>id</em>, <em>type</em>, <em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#nengo_extras.gexf.Attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new instance of Attr(id, type, default)</p>
+<dl class="attribute">
+<dt id="nengo_extras.gexf.Attr.default">
+<code class="descname">default</code><a class="headerlink" href="#nengo_extras.gexf.Attr.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nengo_extras.gexf.Attr.id">
+<code class="descname">id</code><a class="headerlink" href="#nengo_extras.gexf.Attr.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nengo_extras.gexf.Attr.type">
+<code class="descname">type</code><a class="headerlink" href="#nengo_extras.gexf.Attr.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -756,11 +1100,11 @@ individually.</p>
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="examples/mnist_single_layer.html" title="previous chapter (use the left arrow)">Encoding for image recognition</a>
+        <a class="btn btn-default" href="examples/cuda_convnet/webcam_spiking_cnn.html" title="previous chapter (use the left arrow)">Classifying webcam images</a>
       </div>
     
       <div class="pull-right">
-        <a class="btn btn-default" href="visualization-examples.html" title="next chapter (use the right arrow)">Visualization examples</a>
+        <a class="btn btn-default" href="gephi-tutorial.html" title="next chapter (use the right arrow)">Visualizing Nengo networks with Gephi</a>
       </div>
     </div>
     <div class="clearer"></div>
@@ -775,12 +1119,12 @@ individually.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="visualization-examples.html" title="Visualization examples"
+          <a href="gephi-tutorial.html" title="Visualizing Nengo networks with Gephi"
              >next</a> |</li>
         <li class="right" >
-          <a href="examples/mnist_single_layer.html" title="Encoding for image recognition"
+          <a href="examples/cuda_convnet/webcam_spiking_cnn.html" title="Classifying webcam images"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.1.0 docs</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Nengo extras 0.2.0 docs</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">

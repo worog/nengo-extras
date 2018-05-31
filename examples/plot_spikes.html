@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>Creating spike raster plots &#8212; Nengo extras 0.1.0 docs</title>
+    <title>Creating spike raster plots &#8212; Nengo extras 0.2.0 docs</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,7 +34,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/config/TeX-AMS-MML_HTMLorMML.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Visualization examples" href="../visualization-examples.html" />
+    <link rel="next" title="Visualizing the ImageNet classifier" href="cuda_convnet/imagenet_visualization.html" />
+    <link rel="prev" title="Visualizing Nengo networks with Gephi" href="../gephi-tutorial.html" />
 <link rel="stylesheet" type="text/css" href="../_static/custom.css">
 
 
@@ -50,10 +51,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../visualization-examples.html" title="Visualization examples"
+          <a href="cuda_convnet/imagenet_visualization.html" title="Visualizing the ImageNet classifier"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../gephi-tutorial.html" title="Visualizing Nengo networks with Gephi"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../visualization-examples.html" accesskey="U">Visualization examples</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../visualization.html" accesskey="U">Visualization tools</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -64,7 +68,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">Nengo extras 0.1</a>
+    ../index.html" class="text-logo">Nengo extras 0.2</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -74,20 +78,25 @@
     
       <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../deeplearning.html">Deep learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deeplearning-examples.html">Deep learning examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dists.html">Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learning_rules.html">Learning rules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../networks.html">Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../neurons.html">Neuron types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../processes.html">Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vision.html">Vision models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vision-examples.html">Vision examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../visualization.html">Visualization tools</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../visualization-examples.html">Visualization examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../visualization-examples.html#imagenet">ImageNet</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating spike raster plots</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../visualization.html">Visualization tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gephi-tutorial.html">Visualizing Nengo networks with Gephi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating spike raster plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Build-and-run-a-model">Build and run a model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Simple-spike-raster-plot">Simple spike raster plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Improved-plot">Improved plot</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="cuda_convnet/imagenet_visualization.html">Visualizing the ImageNet classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization.html#graphviz-diagrams">GraphViz diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization.html#image-manipulation">Image manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization.html#matplotlib-plots">Matplotlib plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization.html#tkinter-guis">TkInter GUIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization.html#gephi-visualization">Gephi visualization</a></li>
 </ul>
 </li>
 </ul>
@@ -117,7 +126,7 @@
             <ol class="breadcrumb">
               <li><a href="../index.html">Docs</a></li>
               
-                <li><a href="../visualization-examples.html">Visualization examples</a></li>
+                <li><a href="../visualization.html">Visualization tools</a></li>
               
               <li>Creating spike raster plots</li>
             </ol>
@@ -291,8 +300,8 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 </style>
-<div class="section" id="creating-spike-raster-plots">
-<h1>Creating spike raster plots<a class="headerlink" href="#creating-spike-raster-plots" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Creating-spike-raster-plots">
+<h1>Creating spike raster plots<a class="headerlink" href="#Creating-spike-raster-plots" title="Permalink to this headline">¶</a></h1>
 <p>This example demonstrates how spike raster plots can be easily created
 with nengo_extras.</p>
 <div class="nbinput nblast docutils container">
@@ -304,14 +313,15 @@ with nengo_extras.</p>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">nengo</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">nengo_extras.plot_spikes</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">cluster</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">plot_spikes</span><span class="p">,</span> <span class="n">preprocess_spikes</span><span class="p">,</span> <span class="n">sample_by_variance</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="build-and-run-a-model">
-<h2>Build and run a model<a class="headerlink" href="#build-and-run-a-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Build-and-run-a-model">
+<h2>Build and run a model<a class="headerlink" href="#Build-and-run-a-model" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [2]:
@@ -339,18 +349,127 @@ with nengo_extras.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div id="d637c8c0-8d04-42ae-b690-e1cc112e47ae" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('d637c8c0-8d04-42ae-b690-e1cc112e47ae');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Build finished in 0:00:01.';
+
+            fill.style.width = '100%';
+            fill.style.animation = 'pb-fill-anim 2s linear infinite';
+            fill.style.backgroundSize = '100px 100%';
+            fill.style.backgroundImage = 'repeating-linear-gradient(' +
+                '90deg, #bdd2e6, #edf2f8 40%, #bdd2e6 80%, #bdd2e6)';
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div id="18a8a845-7ecf-4677-ba8d-76bbc99297ef" style="
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;">
+  <div class="pb-text" style="
+      position: absolute;
+      width: 100%;">
+    0%
+  </div>
+  <div class="pb-fill" style="
+      background-color: #bdd2e6;
+      width: 0%;">
+    <style type="text/css" scoped="scoped">
+        @keyframes pb-fill-anim {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 0; }
+        }
+    </style>
+    &nbsp;
+  </div>
+</div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<div class="highlight"><pre>
-Building finished in 0:00:01.
-Simulating finished in 0:00:02.
-</pre></div></div>
+<div></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+
+              (function () {
+                  var root = document.getElementById('18a8a845-7ecf-4677-ba8d-76bbc99297ef');
+                  var text = root.getElementsByClassName('pb-text')[0];
+                  var fill = root.getElementsByClassName('pb-fill')[0];
+
+                  text.innerHTML = 'Simulation finished in 0:00:01.';
+
+            if (100.0 > 0.) {
+                fill.style.transition = 'width 0.1s linear';
+            } else {
+                fill.style.transition = 'none';
+            }
+
+            fill.style.width = '100.0%';
+            fill.style.animation = 'none';
+            fill.style.backgroundImage = 'none'
+
+
+                fill.style.animation = 'none';
+                fill.style.backgroundImage = 'none';
+
+              })();
+
+</script></div>
 </div>
 </div>
-<div class="section" id="simple-spike-raster-plot">
-<h2>Simple spike raster plot<a class="headerlink" href="#simple-spike-raster-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Simple-spike-raster-plot">
+<h2>Simple spike raster plot<a class="headerlink" href="#Simple-spike-raster-plot" title="Permalink to this headline">¶</a></h2>
 <p>We can use the <code class="docutils literal"><span class="pre">plot_spikes</span></code> function to create a simple spike raster
 plot.</p>
 <div class="nbinput docutils container">
@@ -389,8 +508,8 @@ plot.</p>
 </div>
 </div>
 </div>
-<div class="section" id="improved-plot">
-<h2>Improved plot<a class="headerlink" href="#improved-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Improved-plot">
+<h2>Improved plot<a class="headerlink" href="#Improved-plot" title="Permalink to this headline">¶</a></h2>
 <p>We can create a more informative plot with some preprocessing of the
 spike trains. Specifically, we subsample interesting ones and sort them
 by similarity. Usually, the preprocessing done with the
@@ -487,9 +606,12 @@ preprocessing pipelines. This example recreates what
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="../visualization-examples.html" title="previous chapter (use the left arrow)">Visualization examples</a>
+        <a class="btn btn-default" href="../gephi-tutorial.html" title="previous chapter (use the left arrow)">Visualizing Nengo networks with Gephi</a>
       </div>
     
+      <div class="pull-right">
+        <a class="btn btn-default" href="cuda_convnet/imagenet_visualization.html" title="next chapter (use the right arrow)">Visualizing the ImageNet classifier</a>
+      </div>
     </div>
     <div class="clearer"></div>
   
@@ -503,10 +625,13 @@ preprocessing pipelines. This example recreates what
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../visualization-examples.html" title="Visualization examples"
+          <a href="cuda_convnet/imagenet_visualization.html" title="Visualizing the ImageNet classifier"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../gephi-tutorial.html" title="Visualizing Nengo networks with Gephi"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.1.0 docs</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../visualization-examples.html" >Visualization examples</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../visualization.html" >Visualization tools</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">
