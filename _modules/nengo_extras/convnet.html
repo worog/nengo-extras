@@ -15,13 +15,13 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>nengo_extras.convnet &#8212; Nengo extras 0.2.0 docs</title>
+    <title>nengo_extras.convnet &#8212; Nengo extras 0.3.0 docs</title>
     <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.2.0',
+        VERSION:     '0.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.3.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../index.html" class="text-logo">Nengo extras 0.2</a>
+    ../../index.html" class="text-logo">Nengo extras 0.3</a>
         <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <h2>Table Of Contents</h2>
@@ -125,7 +125,7 @@
     <span class="k">return</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Conv2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.Conv2d">[docs]</a><span class="k">class</span> <span class="nc">Conv2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="Conv2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.convnet.Conv2d">[docs]</a><span class="k">class</span> <span class="nc">Conv2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform 2-D (image) convolution on an input.</span>
 
 <span class="sd">    Parameters</span>
@@ -252,7 +252,7 @@
         <span class="k">return</span> <span class="n">step_conv2d</span></div>
 
 
-<div class="viewcode-block" id="Pool2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.Pool2d">[docs]</a><span class="k">class</span> <span class="nc">Pool2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="Pool2d"><a class="viewcode-back" href="../../deeplearning.html#nengo_extras.convnet.Pool2d">[docs]</a><span class="k">class</span> <span class="nc">Pool2d</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform 2-D (image) pooling on an input.</span>
 
 <span class="sd">    Parameters</span>
@@ -349,7 +349,7 @@
         <span class="k">return</span> <span class="n">step_pool2d</span></div>
 
 
-<div class="viewcode-block" id="PresentJitteredImages"><a class="viewcode-back" href="../../vision.html#nengo_extras.PresentJitteredImages">[docs]</a><span class="k">class</span> <span class="nc">PresentJitteredImages</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<div class="viewcode-block" id="PresentJitteredImages"><a class="viewcode-back" href="../../vision.html#nengo_extras.convnet.PresentJitteredImages">[docs]</a><span class="k">class</span> <span class="nc">PresentJitteredImages</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="n">images</span> <span class="o">=</span> <span class="n">NdarrayParam</span><span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,))</span>
     <span class="n">image_shape</span> <span class="o">=</span> <span class="n">ShapeParam</span><span class="p">(</span><span class="s1">&#39;image_shape&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">output_shape</span> <span class="o">=</span> <span class="n">ShapeParam</span><span class="p">(</span><span class="s1">&#39;output_shape&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -431,7 +431,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.2.0 docs</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Nengo extras 0.3.0 docs</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
