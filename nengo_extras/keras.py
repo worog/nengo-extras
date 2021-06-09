@@ -31,8 +31,8 @@ class SoftLIF(keras.layers.Layer):
         from keras import backend as K
         if K.backend() == 'tensorflow':
             import tensorflow as tf
-            expm1 = tf.expm1
-            log1p = tf.log1p
+            expm1 = tf.math.expm1
+            log1p = tf.math.log1p
             where = tf.where
         else:
             import theano.tensor as tt
